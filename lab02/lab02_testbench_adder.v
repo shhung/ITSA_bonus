@@ -26,6 +26,8 @@ begin
 	b = 0; 
 	c = 0; 
 	d = 0;
+	correct_sum = 0;
+	correct_ov = 0;
 	test_num <= 0;
 	$dumpfile("adder.vcd");
 	$dumpvars;
