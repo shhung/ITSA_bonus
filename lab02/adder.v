@@ -5,6 +5,6 @@ module  adder(a, b, c, d, sum, ov);
   wire s1 ,s2 ,s3;
 
   assign {s1, s2, s3, sum} = a + b + c + d;
-  assign ov = 1'b0;
+  assign ov = s1 || s2 || s3;
 
 endmodule 
