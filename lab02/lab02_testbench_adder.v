@@ -11,7 +11,7 @@ reg rst = 0;
 reg [3:0] correct_sum;
 reg [7:0] test_num;
 reg correct_ov;
-wire s1, s2, s3;
+reg s1, s2;
 
 always #5 clk = ~clk;
 always #5 rst = ~rst;
@@ -49,8 +49,8 @@ begin
 		d <= {$random} % 16;
 	end
 	else begin
-		{s1, s2, s3, correct_sum} = a + b + c + d;
-		correct_ov = s1 || s2 || s3;
+		{s1, s2, correct_sum} = a + b + c + d;
+		correct_ov = s1 || s2 ;
 		if({ov, sum} == {correct_ov, correct_sum}) begin
 			$display ("Test %d ", test_num);
 			$display ("OK!");
