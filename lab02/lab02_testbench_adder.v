@@ -7,10 +7,11 @@ wire [3:0] sum;
 wire ov;
 
 reg clk = 0;
-reg	rst = 0;
-reg [7:0] correct_sum;
+reg rst = 0;
+reg [3:0] correct_sum;
 reg [7:0] test_num;
 reg correct_ov;
+wire s1, s2, s3;
 
 always #5 clk = ~clk;
 always #5 rst = ~rst;
@@ -19,12 +20,12 @@ adder DUT(a, b, c, d, sum, ov);
 
 initial
 begin
-	clk <= 0;
-	rst <= 0;
-	a <= 0; 
-	b <= 0; 
-	c <= 0; 
-	d <= 0;
+	clk = 0;
+	rst = 0;
+	a = 0; 
+	b = 0; 
+	c = 0; 
+	d = 0;
 	test_num <= 0;
 	$dumpfile("adder.vcd");
 	$dumpvars;
@@ -48,7 +49,8 @@ begin
 		d <= {$random} % 16;
 	end
 	else begin
-		{correct_ov, correct_sum} = a + b + c + d;
+		{s1, s2, s3, correct_sum} = a + b + c + d;
+		correct_ov = s1 || s2 || s3;
 		if({ov, sum} == {correct_ov, correct_sum}) begin
 			$display ("Test %d ", test_num);
 			$display ("OK!");
